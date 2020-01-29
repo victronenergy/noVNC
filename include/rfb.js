@@ -567,6 +567,10 @@ var RFB;
 
             if (this._view_only) { return; } // View only, skip mouse events
 
+			// correct for css resizing the framebuffer
+			y = y / this._target.scrollHeight * this._fb_height;
+			x = x / this._target.scrollWidth * this._fb_width;
+
             this._mouse_arr = this._mouse_arr.concat(
                     RFB.messages.pointerEvent(this._display.absX(x), this._display.absY(y), this._mouse_buttonMask));
             this._sock.send(this._mouse_arr);
